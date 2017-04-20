@@ -138,9 +138,12 @@ else
     echo
 fi
 
-echo "${BOLD}Start Celery workers...${NORMAL_FONT}"
-cd /etc/init.d/ | wget https://github.com/celery/celery/blob/3.1/extra/generic-init.d/celeryd | chmod +x celeryd
+sudo adduser celery
 
+echo "${BOLD}Build configuration files...${NORMAL_FONT}"
+cd /etc/init.d/ | wget https://raw.githubusercontent.com/celery/celery/3.1/extra/generic-init.d/celeryd | chmod +x celeryd
+cp -i celeryd.sh /etc/default/
+sudo chown celery: /root
 if [ $? -eq 0 ]; then
     $SETCOLOR_SUCCESS
     echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
@@ -153,4 +156,4 @@ else
     echo
 fi
 
-# sudo adduser celery
+

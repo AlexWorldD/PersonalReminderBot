@@ -24,7 +24,7 @@ CELERY_APP="flaskapp.celery"
 CELERYD_CHDIR="$HOME/PersonalReminderBot"
 
 # Extra command-line arguments to the worker
-CELERYD_OPTS="--time-limit=300 --concurrency=8"
+CELERYD_OPTS="--time-limit=300 -Q nlp,reminders"
 # Configure node-specific settings by appending node name to arguments:
 #CELERYD_OPTS="--time-limit=300 -c 8 -c:worker2 4 -c:worker3 2 -Ofair:worker1"
 
@@ -45,4 +45,6 @@ CELERYD_GROUP="celery"
 # and owned by the userid/group configured.
 CELERY_CREATE_DIRS=1
 
-CELERY_ROUTES="{'tasks.detect_datetime': { 'queue': 'nlp' }, 'tasks.remind': {'queue': 'reminders'}}"
+#CELERY_ROUTES="{'tasks.detect_datetime': { 'queue': 'nlp' }, 'tasks.remind': {'queue': 'reminders'}}"
+# ./rabbitmqadmin declare queue --vhost=vhost name=nlp
+# rabbitmqctl set_permissions -p vhost radmin ".*" ".*" ".*"
