@@ -30,7 +30,7 @@ fi
 # Secondly, Installing RabbitMQ
 echo "${BOLD}Install RabbitMQ...${NORMAL_FONT}"
 
-sudo apt-get install rabbitmq-server
+sudo apt-get install -y rabbitmq-server
 sudo systemctl start rabbitmq-server
 sudo systemctl enable rabbitmq-server
 
@@ -137,3 +137,20 @@ else
     $SETCOLOR_NORMAL
     echo
 fi
+
+echo "${BOLD}Start Celery workers...${NORMAL_FONT}"
+cd /etc/init.d/ | wget https://github.com/celery/celery/blob/3.1/extra/generic-init.d/celeryd | chmod +x celeryd
+
+if [ $? -eq 0 ]; then
+    $SETCOLOR_SUCCESS
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+    $SETCOLOR_NORMAL
+    echo
+else
+    $SETCOLOR_FAILURE
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[fail]"
+    $SETCOLOR_NORMAL
+    echo
+fi
+
+# sudo adduser celery
