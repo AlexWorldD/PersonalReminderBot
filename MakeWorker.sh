@@ -55,3 +55,18 @@ else
     $SETCOLOR_NORMAL
     echo
 fi
+
+# Installing Celery
+echo "${BOLD}Install Celery...${NORMAL_FONT}"
+pip install celery
+if [ $? -eq 0 ]; then
+    $SETCOLOR_SUCCESS
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+    $SETCOLOR_NORMAL
+    echo
+else
+    $SETCOLOR_FAILURE
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[fail]"
+    $SETCOLOR_NORMAL
+    echo
+fi
