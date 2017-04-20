@@ -4,3 +4,7 @@
 *.pyc
 *.log
 *.pid
+
+# IDE Directories
+.idea
+data
