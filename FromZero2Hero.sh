@@ -11,7 +11,7 @@ NORMAL_FONT=$(tput sgr0)
 # Firstly, update all packages
 echo "${BOLD}Update your system... to Windows 10. Thx)${NORMAL_FONT}"
 sudo apt-get update -y
-Ysudo apt-get upgrade -y
+sudo apt-get upgrade -y
 
 if [ $? -eq 0 ]; then
     $SETCOLOR_SUCCESS
@@ -44,6 +44,22 @@ else
     echo
 fi
 
+# 3d, Installing DateTime parser
+echo "${BOLD}Install DateUtil...${NORMAL_FONT}"
+apt-get -y install python-dateutil
+if [ $? -eq 0 ]; then
+    $SETCOLOR_SUCCESS
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+    $SETCOLOR_NORMAL
+    echo
+else
+    $SETCOLOR_FAILURE
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[fail]"
+    $SETCOLOR_NORMAL
+    echo
+fi
+# apt list --installed
+# sudo apt install python-pip
 # Secondly, Installing RabbitMQ
 echo "${BOLD}Install RabbitMQ...${NORMAL_FONT}"
 sudo echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list
@@ -67,3 +83,12 @@ else
     $SETCOLOR_NORMAL
     echo
 fi
+
+# add new user
+sudo rabbitmqctl add_user worker w
+# add new virtual host
+sudo rabbitmqctl add_vhost vhost
+# set permissions for user on vhost
+sudo rabbitmqctl set_permissions -p vhost worker ".*" ".*" ".*"
+# restart rabbit
+sudo rabbitmqctl restart
