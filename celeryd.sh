@@ -29,7 +29,7 @@ CELERYD_OPTS="--time-limit=300 -Q nlp,reminders"
 #CELERYD_OPTS="--time-limit=300 -c 8 -c:worker2 4 -c:worker3 2 -Ofair:worker1"
 
 # Set logging level to DEBUG
-#CELERYD_LOG_LEVEL="DEBUG"
+CELERYD_LOG_LEVEL="DEBUG"
 
 # %n will be replaced with the first part of the nodename.
 CELERYD_LOG_FILE="/var/log/celery/%n%I.log"
