@@ -27,7 +27,6 @@ sudo rabbitmqctl add_vhost vhost
 # set permissions for user on vhost
 sudo rabbitmqctl set_permissions -p vhost worker ".*" ".*" ".*"
 # restart rabbit
-sudo rabbitmqctl restart
 
 if [ $? -eq 0 ]; then
     $SETCOLOR_SUCCESS
