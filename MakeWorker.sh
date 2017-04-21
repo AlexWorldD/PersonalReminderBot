@@ -124,4 +124,20 @@ else
     echo
 fi
 
+echo "${BOLD}Start Celery Worker...${NORMAL_FONT}"
+
+celery worker -l info -A flaskapp.celery -Q nlp,reminders
+
+if [ $? -eq 0 ]; then
+    $SETCOLOR_SUCCESS
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+    $SETCOLOR_NORMAL
+    echo
+else
+    $SETCOLOR_FAILURE
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[fail]"
+    $SETCOLOR_NORMAL
+    echo
+fi
+
 

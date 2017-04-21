@@ -138,10 +138,28 @@ else
     echo
 fi
 
+echo "${BOLD}Install requests...${NORMAL_FONT}"
+# apt list --installed
+pip install requests
+if [ $? -eq 0 ]; then
+    $SETCOLOR_SUCCESS
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+    $SETCOLOR_NORMAL
+    echo
+else
+    $SETCOLOR_FAILURE
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[fail]"
+    $SETCOLOR_NORMAL
+    echo
+fi
+
 sudo adduser celery
 
 echo "${BOLD}Build configuration files...${NORMAL_FONT}"
-cd /etc/init.d/ | wget https://raw.githubusercontent.com/celery/celery/3.1/extra/generic-init.d/celeryd | chmod +x celeryd
+cd /etc/init.d/
+wget https://raw.githubusercontent.com/celery/celery/3.1/extra/generic-init.d/celeryd
+chmod +x celeryd
+cd $HOME/PersonalReminderBot
 cp -i celeryd.sh /etc/default/
 sudo chown celery: /root
 if [ $? -eq 0 ]; then
@@ -156,4 +174,19 @@ else
     echo
 fi
 
+echo "${BOLD}Configure RabbitMQ...${NORMAL_FONT}"
+read -p 'RabbitMQ Server IP: ' ip
+sed -i "s/\(\@.*\/\)/@$ip\//g" default_config.py
+
+if [ $? -eq 0 ]; then
+    $SETCOLOR_SUCCESS
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+    $SETCOLOR_NORMAL
+    echo
+else
+    $SETCOLOR_FAILURE
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[fail]"
+    $SETCOLOR_NORMAL
+    echo
+fi
 
