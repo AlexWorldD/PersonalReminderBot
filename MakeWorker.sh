@@ -108,4 +108,20 @@ else
     echo
 fi
 
+echo "${BOLD}Configure RabbitMQ...${NORMAL_FONT}"
+read -p 'RabbitMQ Server IP: ' ip
+sed -i "s/\(\@.*\/\)/@$ip\//g" default_config.py
+
+if [ $? -eq 0 ]; then
+    $SETCOLOR_SUCCESS
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[OK]"
+    $SETCOLOR_NORMAL
+    echo
+else
+    $SETCOLOR_FAILURE
+    echo -n "$(tput hpa $(tput cols))$(tput cub 6)[fail]"
+    $SETCOLOR_NORMAL
+    echo
+fi
+
 
