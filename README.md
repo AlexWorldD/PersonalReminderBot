@@ -22,12 +22,12 @@ $ git clone https://github.com/AlexWorldD/PersonalReminderBot
 ```
 Then, your should decide which type of machine you'd like to create: RabbitMQ server or just a Worker. For Worker you should use MakeWorker script:
 ```sh
-$ chmod +x MakeWorkerl.sh
+$ chmod +x MakeWorker.sh
 ```
 
 And finally, Run script, which'll build a Worker from your machine!
 ```sh
-$ ./MakeWorkerl.sh
+$ ./MakeWorker.sh
 ```
 And amazing FromZero2Hero for RabbitMQ installation and configuration.
 ```sh
