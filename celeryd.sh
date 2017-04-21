@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Names of nodes to start
 #   most people will only start one node:
-CELERYD_NODES="worker1"
+#CELERYD_NODES="worker1"
 #   but you can also start multiple and configure settings
 #   for each in CELERYD_OPTS
-#CELERYD_NODES="worker1 worker2 worker3"
+CELERYD_NODES="worker1 worker2 worker3"
 #   alternatively, you can specify the number of nodes to start:
 #CELERYD_NODES=10
 
@@ -24,7 +24,7 @@ CELERY_APP="flaskapp.celery"
 CELERYD_CHDIR="$HOME/PersonalReminderBot"
 
 # Extra command-line arguments to the worker
-CELERYD_OPTS="--time-limit=300 -Q nlp,reminders"
+CELERYD_OPTS="--time-limit=300 -q nlp,reminders"
 # Configure node-specific settings by appending node name to arguments:
 #CELERYD_OPTS="--time-limit=300 -c 8 -c:worker2 4 -c:worker3 2 -Ofair:worker1"
 

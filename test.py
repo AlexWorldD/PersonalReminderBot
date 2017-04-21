@@ -6,5 +6,5 @@ app = Celery('tasks', backend='amqp',
 def add(x, y):
     return x + y
 
-# task.detect_datetime.delay('28.04.2017', 5).get()
+# tasks.detect_datetime.delay('28.04.2017', 5).get()
 # task.remind.delay(t)
